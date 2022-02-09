@@ -31,8 +31,6 @@ namespace PhoneBook.Models
 
         public bool AddContact(Contact contact) => ContactService.AddContact(contact);
 
-        public List<Contact> Search(string searchString) => ContactService.Search(searchString);
-
         #endregion
     }
 }
