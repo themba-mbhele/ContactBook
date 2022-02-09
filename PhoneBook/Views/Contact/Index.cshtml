@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Contacts";
+}
+@model ContactViewModel
+<div class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                Contacts
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Contact</button>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:10px">
+        @if (Model.Contacts != null && Model.Contacts.Count > 0)
+        {
+            <input type="text" id="search" class="form-control" placeholder="Search by name" aria-label="Recipient's username" aria-describedby="basic-addon2" onkeyup="search()">
+            <table class="table table-striped" id="tblContacts" style="margin-top:10px">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Contacts)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Name)</td>
+                            <td>@Html.DisplayFor(m => item.Number)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center" style="vertical-align:central">
+                <p>No contacts. To add a contact you can click the above button</p>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Add Contact Modal  -->
+<form method="post" asp-action="Index" asp-controller="Contact">
+    <div id="exampleModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Customer Details Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" asp-for="NewContact.Name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Number:</label>
+                        <input type="text" asp-for="NewContact.Number" class="form-control" />
+                    </div>
+                    <div class="modal-footer form-group">
+                        <input type="submit" value="Create" class="btn btn-primary">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+    <script>
+        function search() {
+            $("tr").each(function (index, value) {
+                if (index > 0 && !$(this).find("td")[0].innerText.toLowerCase().includes($("#search").val().toLowerCase())) {
+                    $(this).attr("hidden", true);
+                } else {
+                    $(this).removeAttr("hidden");
+                }
+                console.log(value);
+            });
+        }
+    </script>
+}

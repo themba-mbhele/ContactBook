@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PhoneBook.Business\PhoneBook.Business.csproj" />
+    <ProjectReference Include="..\PhoneBook.Data\PhoneBook.Data.csproj" />
+    <ProjectReference Include="..\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj" />
+    <ProjectReference Include="..\PhoneBook.Models\PhoneBook.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
